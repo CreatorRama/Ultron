@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Depends,APIRouter
+from fastapi import FastAPI, Depends, APIRouter
 from sqlalchemy.orm import Session as DBSession
 
 from database import engine, Base, get_db
 from models import Session
+from Schema import ClientRequest
 
 
 Base.metadata.create_all(bind=engine)
@@ -12,17 +13,18 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api/v1")
 
 
-@app.post("/sessions")
+@api_router.post("/sessions")
 def create_session(
-    data: dict,
+    data: ClientRequest,
     db: DBSession = Depends(get_db)
 ):
 
     new_session = Session(
-        client_version=data["client_version"],
-        browser=data["browser"],
+        client_version=data.client_version,
+        browser=data.browser,
         status="active",
-        expires_in=1800
+        expires_in=1800,
+        policy=data.privacy_policy.model_dump(),  
     )
 
     db.add(new_session)
@@ -37,3 +39,6 @@ def create_session(
         "createdAt": new_session.createdAt,
         "updatedAt": new_session.updatedAt
     }
+
+
+app.include_router(api_router)
