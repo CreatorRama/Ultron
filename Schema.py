@@ -39,9 +39,14 @@ class URLInfo(BaseModel):
     path: str
 
 
+class Viewport(BaseModel):
+    width: int
+    height: int
+
+
 class Page(BaseModel):
     title: str
-    viewport: BBox
+    viewport: Viewport
 
 
 class Element(BaseModel):

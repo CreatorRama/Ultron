@@ -82,7 +82,7 @@ def create_session(
 # CREATE OBSERVATION + CONTEXT
 # -----------------------------------------
 
-@api_router.post("/sessions/{session_id}/observe")
+@api_router.post("/sessions/{session_id}/observe",status_code=201)
 def create_observation(
     session_id: str,
     data: ObservationRequest,
@@ -92,7 +92,8 @@ def create_observation(
     # -------------------------------------
     # 1. Check session exists
     # -------------------------------------
-
+    print("ram");
+    
     session = (
         db.query(Session)
         .filter(Session.session_id == session_id)
