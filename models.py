@@ -1,12 +1,4 @@
-from sqlalchemy import (
-    Column,
-    Integer,
-    String,
-    DateTime,
-    ForeignKey,
-    Text,
-    JSON
-)
+from sqlalchemy import Column, String, Integer, JSON, DateTime,Text,ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB
 import uuid
