@@ -133,7 +133,7 @@ class Context(Base):
         String(100),
         unique=True,
         nullable=False,
-        default=lambda: f"ctx_{uuid.uuid4().hex}"
+        default="ctx_9e152cd28e844ab98431ed348c8d3484"
     )
 
     observation_id = Column(
